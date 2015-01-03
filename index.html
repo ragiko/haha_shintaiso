@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <style>
+.row {
+    border: solid black;
+    text-align: center;
+    height: 400px;
+    line-height: 400px;
+}
+img {
+    width: 250px;
+    height: auto;
+}
+
+span{
+    display: block;
+}
+
+.dv,
+.dv img {
+    width: 150px;
+    height: 150px;
+    margin: 10px;
+    color:#fff;
+    text-align: center;
+}
+#div1 {
+    background:red;
+}
+
+#div2{
+    background:blue;
+}
+
+#div3{
+    width: 250px;
+    height: 250px;
+    background:gray;
+}
+    </style>
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script>
+function render() {
+    var imgSize = $(".row > img").length;
+    var rowWidth = $(".row").width()-100;
+
+
+    if (imgSize > 3) {
+        var imgWidth = rowWidth/imgSize;
+        $(".row > img").width(imgWidth);
+    }
+}
+
+$(function() {
+        
+
+    $(".dragDiv").draggable();
+
+    $( "#div3" ).droppable({
+        accept : ".dragDiv" , // 受け入れる要素を指定
+        drop : function(event , ui){
+            //  dragされてきたオブジェクトを取得してクローン作製
+            var dragId = ui.draggable.attr("id");
+            if($(this).find(".drop" + dragId).length == 0){
+                $(this).append('<span class="drop' + dragId +'">' + ui.draggable.text() + 'が置かれたよ</span>');
+                $(".row").append('<img src="./data/1" alt="">');
+                render();
+            }
+        } ,
+        out : function (event , ui){
+            var dragId = ui.draggable.attr("id");
+            $(this).find(".drop" + dragId).remove();
+        }
+
+    });
+});
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <img src="./data/1" alt="">
+        <img src="./data/2" alt="">
+    </div>
+
+    <div id="div1" class="dv dragDiv">
+        <img src="./data/1" alt="">
+    </div>
+    <div id="div2" class="dv dragDiv">
+        <img src="./data/2" alt="">
+    </div>
+    <div id="div3" class="dv">
+        ここにおけるよ
+    </div>
+</div>
+</body>
+</html>
