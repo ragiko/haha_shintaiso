@@ -37,7 +37,7 @@ angular.module('App', ['ngSanitize'])
             actions: [],
             sumLevel: 0.0,
         };
-    }
+    };
 
     $scope.addActionLine = function () {
         $scope.lines.push(createActionLine());
@@ -45,7 +45,7 @@ angular.module('App', ['ngSanitize'])
 
     $scope.editingLine = null;
 
-    $scope.addActionToLine = function (img) {
+    $scope.addActionToLine = function (action) {
         if ($scope.editingLine === null) {
             alert("リストを選択してください");
             return; 
@@ -53,12 +53,27 @@ angular.module('App', ['ngSanitize'])
 
         // editingLineにたいしてimgを追加
         $scope.editingLine.actions.push({
-            img: img, 
-            level: 1,
+            imgSrc: action.src, 
+            // data-*を取得: http://qiita.com/skinoshita/items/388eb277843e2d0c03de
+            level: Number(action.dataset.level), // javascript (not jquery)
         });
     };
 
     $scope.editActionLine = function(line) {
         $scope.editingLine = line;
-    }
+    };
+
+    $scope.$watch('lines', function (lines) {
+        if ($scope.editingLine != null) {
+            var actions = $scope.editingLine.actions;
+            var sum = 0;
+
+            for (var i = 0; i < actions.length; i++ ) {
+                sum += actions[i].level;
+            }
+
+            $scope.editingLine.sumLevel = sum;
+        }
+    }, true);
+
 }]);

@@ -66,7 +66,8 @@
                     <td>{{ line.sumLevel }}</td>
                     <td>
                         <div ng-repeat="action in line.actions">
-                            <img ng-src="{{action.img.src}}"/>
+                            <img ng-src="{{action.imgSrc}}"/>
+                            <p>{{ action.level }}</p>
                         </div>
                     </td>
                 </tr>
