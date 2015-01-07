@@ -54,28 +54,18 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>0.6</td>
-                  <td>
-                    <div ng-repeat="action in actions">
-                        <img ng-src="{{action.img.src}}"/>
-                    </div>
-                    <pre>{{ actions|json }}</pre>
-                  </td>
-                </tr>
-                <tr>
-                  <td>0.6</td>
-                  <td>
-                    <img class="img-responsive " src="./data/a.png" alt="">
-                  </td>
-                </tr>
-                <tr>
-                  <td>0.6</td>
-                  <td>
-                    <img class="img-responsive " src="./data/a.png" alt="">
-                  </td>
+                <tr ng-repeat="line in lines" 
+                    ng-click="editActionLine(line)"
+                    my-select="line == editingLine" >
+                    <td>{{ line.sumLevel }}</td>
+                    <td>
+                        <div ng-repeat="action in line.actions">
+                            <img ng-src="{{action.img.src}}"/>
+                        </div>
+                    </td>
                 </tr>
               </tbody>
+              <pre>{{ lines|json }}</pre>
             </table>
           </div>
         </div>
