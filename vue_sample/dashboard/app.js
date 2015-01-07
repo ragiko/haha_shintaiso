@@ -95,21 +95,54 @@ angular.module('App', ['ngSanitize'])
         $scope.lines[origin] = temp;
     };
 
-    $scope.moveLineUp = function(index){            
+    // 右の操作パネル当たり
+    $scope.createBefourLine = function(){            
+        var index = $scope.lines.indexOf($scope.editingLine);
+        if (index == -1 ) {
+            return;
+        }
+        $scope.lines.splice(index, 0, createActionLine());
+    };
+
+    $scope.createAfterLine = function(){            
+        var index = $scope.lines.indexOf($scope.editingLine);
+        if (index == -1 ) {
+            return;
+        }
+        $scope.lines.splice(index+1 , 0, createActionLine());
+    };
+
+
+
+    $scope.moveLineUp = function(){            
+        // 同じ要素idを見つける:  http://stackoverflow.com/questions/20756694/angularjs-find-the-index-position-of-filtered-value-in-the-original-array
+        var index = $scope.lines.indexOf($scope.editingLine);
+        if (index == -1 ) {
+            return;
+        }
         moveLine(index, index - 1);
     };
 
-    $scope.moveLineDown = function(index){                    
+    $scope.moveLineDown = function(){                    
+        var index = $scope.lines.indexOf($scope.editingLine);
+        if (index == -1 ) {
+            return;
+        }
         moveLine(index, index + 1);
     };
 
-    $scope.removeLine = function (index) {
+    $scope.removeLine = function () {
         // 要素が1個のときはデリートさせない
         if ($scope.lines.length == 1) {
             return; 
         }
+
+        var index = $scope.lines.indexOf($scope.editingLine);
+        if (index == -1 ) {
+            return;
+        }
+
         // http://www.gesource.jp/weblog/?p=4112
         $scope.lines.splice(index, 1);
     };
-
 }]);

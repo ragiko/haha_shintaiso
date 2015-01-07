@@ -63,7 +63,6 @@ li {
                   <td>順番</td>
                   <td>難度</td>
                   <td>動作</td>
-                  <td></td>
                 </tr>
               </thead>
               <tbody>
@@ -80,19 +79,20 @@ li {
                             </li>
                         </ul>
                     </td>
-                    <td>
-                        <button ng-click="moveLineUp($index)">up</button>
-                        <button ng-click="moveLineDown($index)">down</button>
-                        <button ng-click="removeLine($index)">delete</button>
-                    </td>
                 </tr>
               </tbody>
             </table>
             <pre>{{ lines|json }}</pre>
+            <pre>{{ lines.indexOf(editingLine) }}</pre>
           </div>
         </div>
         <div class="col-md-4 sidebar" >
+            <button ng-click="createBefourLine()">前にlineを挿入</button><br>
+            <button ng-click="createAfterLine()">後にlineを挿入</button><br>
             <button ng-click="addActionLine()">一番後ろline追加</button><br>
+            <button ng-click="moveLineUp()">up</button>
+            <button ng-click="moveLineDown()">down</button>
+            <button ng-click="removeLine()">delete</button>
             <div class="row">
                 <div class="col-md-3">
                     <img img-click class="img-responsive" src="./data/a.png" alt="" data-level=1>
