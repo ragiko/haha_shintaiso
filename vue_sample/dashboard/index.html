@@ -63,6 +63,7 @@ li {
                   <td>順番</td>
                   <td>難度</td>
                   <td>動作</td>
+                  <td></td>
                 </tr>
               </thead>
               <tbody>
@@ -79,14 +80,18 @@ li {
                             </li>
                         </ul>
                     </td>
+                    <td>
+                        <button ng-click="moveLineUp($index)">up</button>
+                        <button ng-click="moveLineDown($index)">down</button>
+                    </td>
                 </tr>
               </tbody>
             </table>
-            <button ng-click="addActionLine()">line追加</button>
             <pre>{{ lines|json }}</pre>
           </div>
         </div>
         <div class="col-md-4 sidebar" >
+            <button ng-click="addActionLine()">一番後ろline追加</button><br>
             <div class="row">
                 <div class="col-md-3">
                     <img img-click class="img-responsive" src="./data/a.png" alt="" data-level=1>

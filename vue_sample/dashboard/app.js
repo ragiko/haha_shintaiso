@@ -80,4 +80,25 @@ angular.module('App', ['ngSanitize'])
         }
     }, true);
 
+    // lineの移動機能
+    function moveLine(origin, destination) {
+        // undefinedの比較: http://blog.tojiru.net/article/205007468.html
+        if (!$scope.lines[destination]) {
+            return;
+        }
+
+        var temp = $scope.lines[destination];
+
+        $scope.lines[destination] = $scope.lines[origin];
+        $scope.lines[origin] = temp;
+    };
+
+    $scope.moveLineUp = function(index){            
+        moveLine(index, index - 1);
+    };
+
+    $scope.moveLineDown = function(index){                    
+        moveLine(index, index + 1);
+    };
+
 }]);
