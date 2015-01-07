@@ -16,6 +16,12 @@
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
 
+    <style>
+.editing {
+    border: solid 3px black;
+}
+    </style>
+
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="../assets/js/ie-emulation-modes-warning.js"></script>
@@ -56,7 +62,7 @@
               <tbody>
                 <tr ng-repeat="line in lines" 
                     ng-click="editActionLine(line)"
-                    my-select="line == editingLine" >
+                    ng-class="{editing: line == editingLine}">
                     <td>{{ line.sumLevel }}</td>
                     <td>
                         <div ng-repeat="action in line.actions">
@@ -65,18 +71,18 @@
                     </td>
                 </tr>
               </tbody>
-              <pre>{{ lines|json }}</pre>
             </table>
+            <button ng-click="addActionLine()">line追加</button>
+            <pre>{{ lines|json }}</pre>
           </div>
         </div>
         <div class="col-md-4 sidebar" >
-            <button my-dialog="world">aaaaaaaa</button>
             <div class="row">
                 <div class="col-md-3">
-                    <img img-click class="img-responsive " src="./data/a.png" alt="">
+                    <img img-click class="img-responsive" src="./data/a.png" alt="" data-level=1>
                 </div>
                 <div class="col-md-3">
-                    <img img-click class="img-responsive " src="./data/b.png" alt="">
+                    <img img-click class="img-responsive " src="./data/b.png" alt="" data-level=2>
                 </div>
             </div>
         </div>

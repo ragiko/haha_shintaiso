@@ -27,16 +27,7 @@ angular.module('App', ['ngSanitize'])
   };
 }])
 .controller('MainController', ['$scope', '$filter', function ($scope, $filter) {
-    var where = $filter('filter'); // filter フィルタ関数の取得
-
-    // 一つ一つの行動
-    $scope.actions = [];
-
-    $scope.addAction = function (img) {
-        $scope.actions.push({
-            img: img 
-        });
-    };
+    // var where = $filter('filter'); // filter フィルタ関数の取得
 
     // 行動の集まった1行のリスト
     $scope.lines = [createActionLine()] // 初期化
@@ -44,31 +35,30 @@ angular.module('App', ['ngSanitize'])
     function createActionLine() {
         return {
             actions: [],
-            done: false,
             sumLevel: 0.0,
         };
     }
 
-    $scope.editingLine = null;
+    $scope.addActionLine = function () {
+        $scope.lines.push(createActionLine());
+    };
 
-    $scope.editActionLine = function(line) {
-        $scope.editingLine = line;
-    }
+    $scope.editingLine = null;
 
     $scope.addActionToLine = function (img) {
         if ($scope.editingLine === null) {
             alert("リストを選択してください");
+            return; 
         }
 
         // editingLineにたいしてimgを追加
         $scope.editingLine.actions.push({
-            img: img 
+            img: img, 
+            level: 1,
         });
-
-        // var a = where($scope.lines, $scope.filter.editActionLine);
-
-        // console.log(a);
     };
 
-
+    $scope.editActionLine = function(line) {
+        $scope.editingLine = line;
+    }
 }]);
