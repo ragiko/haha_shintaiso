@@ -72,6 +72,7 @@ angular.module('App', ['ngSanitize'])
             var actions = $scope.editingLine.actions;
             var sum = 0;
 
+            // TODO: angular.forEach
             for (var i = 0; i < actions.length; i++ ) {
                 sum += actions[i].level;
             }
@@ -81,6 +82,7 @@ angular.module('App', ['ngSanitize'])
     }, true);
 
     // lineの移動機能
+    // 参考: http://qiita.com/matsuzan/items/6cd435cfa6418b86e0c7
     function moveLine(origin, destination) {
         // undefinedの比較: http://blog.tojiru.net/article/205007468.html
         if (!$scope.lines[destination]) {
@@ -99,6 +101,15 @@ angular.module('App', ['ngSanitize'])
 
     $scope.moveLineDown = function(index){                    
         moveLine(index, index + 1);
+    };
+
+    $scope.removeLine = function (index) {
+        // 要素が1個のときはデリートさせない
+        if ($scope.lines.length == 1) {
+            return; 
+        }
+        // http://www.gesource.jp/weblog/?p=4112
+        $scope.lines.splice(index, 1);
     };
 
 }]);
