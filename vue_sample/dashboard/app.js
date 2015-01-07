@@ -40,7 +40,10 @@ angular.module('App', ['ngSanitize'])
     };
 
     $scope.addActionLine = function () {
-        $scope.lines.push(createActionLine());
+        line = createActionLine();
+
+        $scope.lines.push(line);
+        $scope.editingLine = line; // 追加したlineを編集する
     };
 
     $scope.editingLine = null;
@@ -65,6 +68,7 @@ angular.module('App', ['ngSanitize'])
 
     $scope.$watch('lines', function (lines) {
         if ($scope.editingLine != null) {
+            // 難度の合計を計算
             var actions = $scope.editingLine.actions;
             var sum = 0;
 

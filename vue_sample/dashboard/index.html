@@ -17,6 +17,11 @@
     <link href="dashboard.css" rel="stylesheet">
 
     <style>
+li {
+    width: 6em;
+    float: left;
+    list-style: none;
+}
 .editing {
     border: solid 3px black;
 }
@@ -55,6 +60,7 @@
             <table class="table table-striped">
               <thead>
                 <tr>
+                  <td>順番</td>
                   <td>難度</td>
                   <td>動作</td>
                 </tr>
@@ -63,12 +69,15 @@
                 <tr ng-repeat="line in lines" 
                     ng-click="editActionLine(line)"
                     ng-class="{editing: line == editingLine}">
+                    <td>{{ $index }}</td>
                     <td>{{ line.sumLevel }}</td>
                     <td>
-                        <div ng-repeat="action in line.actions">
-                            <img ng-src="{{action.imgSrc}}"/>
-                            <p>{{ action.level }}</p>
-                        </div>
+                        <ul>
+                            <li ng-repeat="action in line.actions">
+                                <img ng-src="{{action.imgSrc}}"/>
+                                <span>{{ action.level }}</span>
+                            </li>
+                        </ul>
                     </td>
                 </tr>
               </tbody>
